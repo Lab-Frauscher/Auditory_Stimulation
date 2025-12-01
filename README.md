@@ -48,33 +48,37 @@ The directory structure is as follows:
 
 Operating system: Windows, macOS, or Linux
 
-###MATLAB
+### MATLAB
+
 -   MATLAB R2022b or higher
 -   Required toolboxes:
-  1.  Signal Processing Toolbox
-  2.  Statistics and Machine Learning Toolbox
-  
-###Python
+
+1.  Signal Processing Toolbox
+2.  Statistics and Machine Learning Toolbox
+
+### Python
+
 -   Python 3.10.11 or higher
 -   Required libraries:
-  1.  numpy ≥ 1.25.0
-  2.  pandas ≥ 2.2.3
-  3.  scipy ≥ 1.11.1
-  4.  h5py ≥ 3.9.0
-  5.  matplotlib ≥ 3.7.2
-  6.  seaborn ≥ 0.13.2
+
+1.  numpy ≥ 1.25.0
+2.  pandas ≥ 2.2.3
+3.  scipy ≥ 1.11.1
+4.  h5py ≥ 3.9.0
+5.  matplotlib ≥ 3.7.2
+6.  seaborn ≥ 0.13.2
 
 ## Installation
 
 Download the repository using the following *git* command:
 
-*git clone <https://inser_url>*
+*git clone <https://github.com/Lab-Frauscher/Auditory_Stimulation>*
 
-###MATLAB setup:
+### MATLAB setup:
 
 Install each prerequisite toolbox by first opening MATLAB R2022b and navigating to Home \> Add-ons \> Get Add-ons. Type the name of each respective toolbox into the search bar and install it.
 
-###Python setup:
+### Python setup:
 
 It is strongly recommended to create and activate a virtual environment first. Then, install all dependencies for Python using *pip*:
 
@@ -92,7 +96,7 @@ Time to run *figures_7abc_S2.py*: 3.5569 seconds
 
 ## Reproducing the analyses
 
-The demo scripts use sample  SEEG data from two patients (*P11.mat*, *P14.mat*) (~20 min sampled at 2048 Hz), which can be found in the demo_data subdirectory.
+The demo scripts use sample SEEG data from two patients (*P11.mat*, *P14.mat*) (\~20 min sampled at 2048 Hz), which can be found in the demo_data subdirectory.
 
 The structure of the *Pxx.mat* file is as follows:
 
@@ -134,7 +138,6 @@ If you want to reproduce the result figures in the manuscript, the necessary res
 Note:
 
 The function *spike_detector_hilbert_v25.m* for IED detection was previously developed for earlier work (<https://github.com/Lab-Frauscher/Spike-Gamma>) and is based on the method described by *Janca et al., 2015*. The function *postprocessing_v3.m* is an updated version of earlier code, adapted for the analyses reported here. All other scripts were written specifically for this study.
-
 
 ## Running the code on your own data
 
