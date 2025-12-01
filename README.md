@@ -96,7 +96,7 @@ Time to run *figures_7abc_S2.py*: 3.5569 seconds
 
 ## Reproducing the analyses
 
-The demo scripts use sample SEEG data from two patients (*P11.mat*, *P14.mat*) (\~20 min sampled at 2048 Hz), which can be found in the demo_data subdirectory.
+The demo scripts use sample SEEG data from two patients (*P11.mat*, *P14.mat*) (\~20 min sampled at 200 Hz), which can be found in the demo_data subdirectory.
 
 The structure of the *Pxx.mat* file is as follows:
 
