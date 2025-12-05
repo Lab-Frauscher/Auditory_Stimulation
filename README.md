@@ -52,21 +52,19 @@ Operating system: Windows, macOS, or Linux
 
 -   MATLAB R2022b or higher
 -   Required toolboxes:
-
-1.  Signal Processing Toolbox
-2.  Statistics and Machine Learning Toolbox
+    1.  Signal Processing Toolbox
+    2.  Statistics and Machine Learning Toolbox
 
 ### Python
 
 -   Python 3.10.11 or higher
 -   Required libraries:
-
-1.  numpy ≥ 1.25.0
-2.  pandas ≥ 2.2.3
-3.  scipy ≥ 1.11.1
-4.  h5py ≥ 3.9.0
-5.  matplotlib ≥ 3.7.2
-6.  seaborn ≥ 0.13.2
+    1.  numpy ≥ 1.25.0
+    2.  pandas ≥ 2.2.3
+    3.  scipy ≥ 1.11.1
+    4.  h5py ≥ 3.9.0
+    5.  matplotlib ≥ 3.7.2
+    6.  seaborn ≥ 0.13.2
 
 ## Installation
 
