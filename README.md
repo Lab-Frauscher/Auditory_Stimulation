@@ -52,23 +52,23 @@ Operating system: Windows, macOS, or Linux
 
 -   MATLAB R2022b or higher
 -   Required toolboxes:
-
-1.  Signal Processing Toolbox
-2.  Statistics and Machine Learning Toolbox
+    1.  Signal Processing Toolbox
+    2.  Statistics and Machine Learning Toolbox
 
 ### Python
 
 -   Python 3.10.11 or higher
 -   Required libraries:
-
-1.  numpy ≥ 1.25.0
-2.  pandas ≥ 2.2.3
-3.  scipy ≥ 1.11.1
-4.  h5py ≥ 3.9.0
-5.  matplotlib ≥ 3.7.2
-6.  seaborn ≥ 0.13.2
+    1.  numpy ≥ 1.25.0
+    2.  pandas ≥ 2.2.3
+    3.  scipy ≥ 1.11.1
+    4.  h5py ≥ 3.9.0
+    5.  matplotlib ≥ 3.7.2
+    6.  seaborn ≥ 0.13.2
 
 ## Installation
+
+**NOTE:** The repository contains large data files which are managed using Git Large File Storage (Git LFS). You must install Git LFS before cloning the repository to ensure the data files are downloaded correctly.
 
 Download the repository using the following *git* command:
 
@@ -135,9 +135,7 @@ If you want to reproduce the result figures in the manuscript, the necessary res
 
 *figures_7abc_S2.py*
 
-Note:
-
-The function *spike_detector_hilbert_v25.m* for IED detection was previously developed for earlier work (<https://github.com/Lab-Frauscher/Spike-Gamma>) and is based on the method described by *Janca et al., 2015*. The function *postprocessing_v3.m* is an updated version of earlier code, adapted for the analyses reported here. All other scripts were written specifically for this study.
+**NOTE:** The function *spike_detector_hilbert_v25.m* for IED detection was previously developed for earlier work (<https://github.com/Lab-Frauscher/Spike-Gamma>) and is based on the method described by *Janca et al., 2015*. The function *postprocessing_v3.m* is an updated version of earlier code, adapted for the analyses reported here. All other scripts were written specifically for this study.
 
 ## Running the code on your own data
 
