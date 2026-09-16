@@ -31,6 +31,8 @@ The pipeline processes stereo-EEG (SEEG) and scalp EEG recordings from patients 
 ## Repository Structure
 
 ```bash
+├── LICENCE
+├── README.md
 ├── active_channels.pkl
 ├── arousal_annotations.xlsx
 ├── channel_labels.xlsx
@@ -58,7 +60,6 @@ The pipeline processes stereo-EEG (SEEG) and scalp EEG recordings from patients 
 ├── ied_propagation_analysis.py
 ├── ied_slow-wave_power-ratio_analysis.py
 ├── powerratio_scalp_stimulation.pkl
-├── README.md
 ├── requirements
 ├── spectral_power_scalp.py
 ├── thalamus_analysis.py
@@ -176,14 +177,12 @@ python detect_slow_wave.py
 
 ### Step 1: Scalp EEG Power Ratios
 
-Compute baseline pre-stimulus delta power ratio (0.5–4.0 Hz / 4.5–30.0 Hz) for scalp channel:
+Compute baseline pre-stimulus delta power ratio (0.5–4.0 Hz / 4.5–30.0 Hz) for scalp channels:
 
 ```bash
 python spectral_power_scalp.py
 
 ```
-
-*Output generated:* `powerratio_scalp_stimulation.pkl`
 
 ---
 
@@ -211,7 +210,7 @@ python hfo_analysis.py
 
 ### Step 4: IED Propagation & Thalamic Spectral Dynamics
 
-Group consecutive temporal spikes into discrete propagation events, and analyze subcortical/thalamic SEEG power ratio dynamics:
+Group consecutive temporal spikes into discrete propagation events, and analyze thalamic SEEG power ratio dynamics:
 
 ```bash
 python ied_propagation_analysis.py
@@ -230,8 +229,6 @@ cd figures
 python figures_8abc_S16.py
 
 ```
-
-*Outputs generated:* PDF figures in `figures/`.
 
 ---
 
@@ -262,5 +259,3 @@ To apply this pipeline to custom datasets:
 1. Janca, R. et al. Detection of Interictal Epileptiform Discharges Using Signal Envelope Distribution Modelling: Application to Epileptic and Non-Epileptic Intracranial Recordings. *Brain Topogr* 28, 172–183 (2015). [https://doi.org/10.1007/s10548-014-0379-1](https://doi.org/10.1007/s10548-014-0379-1?utm_source=gemini)
 2. von Ellenrieder, N., Frauscher, B., Dubeau, F. & Gotman, J. Interaction with slow waves during sleep improves discrimination of physiologic and pathologic high-frequency oscillations (80-500 Hz). *Epilepsia* 57, 869–878 (2016). [https://doi.org/10.1111/epi.13380](https://doi.org/10.1111/epi.13380?utm_source=gemini)
 3. Frauscher, B. et al. Facilitation of epileptic activity during sleep is mediated by high amplitude slow waves. *Brain* 138, 1629–1641 (2015). [https://doi.org/10.1093/brain/awv073](https://doi.org/10.1093/brain/awv073?utm_source=gemini)
-
-```
