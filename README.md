@@ -147,7 +147,7 @@ deactivate
 
 ## Expected Runtimes
 
-Evaluated on a standard desktop computer (Apple M-series / Intel i7 CPU, 16 GB RAM):
+Evaluated on a standard desktop computer:
 
 | Script | Approx. Runtime |
 | --- | --- |
