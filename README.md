@@ -111,7 +111,7 @@ cd Auditory_Stimulation
 ### 2. Set Up Virtual Environment & Core Dependencies
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
 # Install core packages and fixed epycom/numba environment
@@ -129,7 +129,7 @@ Clone and install the slow-wave detector package into your active environment. I
 git clone git@gitlab.com:anphy_duke/lab-tools/slow-wave-detector.git
 
 # Create dedicated virtual environment
-python -m venv venv_sw
+python3 -m venv venv_sw
 source venv_sw/bin/activate  # On Windows: venv_sw\Scripts\activate
 
 # Install detector dependencies and package
@@ -147,7 +147,7 @@ deactivate
 
 ## Expected Runtimes
 
-Evaluated on a standard desktop computer:
+Evaluated on a standard desktop computer (Apple M-series / Intel i7 CPU, 16 GB RAM):
 
 | Script | Approx. Runtime |
 | --- | --- |
@@ -189,7 +189,7 @@ venv_sw/bin/python detect_slow_wave.py
 Compute baseline pre-stimulus spectral power ratio (0.5–4.0 Hz / 4.5–30.0 Hz) for scalp EEG channels:
 
 ```bash
-source venv_main/bin/activate
+source venv/bin/activate
 python spectral_power_scalp.py
 
 ```
@@ -260,7 +260,7 @@ To apply this pipeline to custom datasets:
 2. **Event Annotations:** Update `arousal_annotations.xlsx` with UTC start timestamps (`utc_stim_start`, `utc_arousal_start`), event conditions (`evoked`, `spontaneous`, `control`), and sleep stages (`stage`, `stage_post`).
 3. **Channel Mapping:** Define bipolar electrode contact pairs, clinical classifications (`SOZ` vs. `non-SOZ`), and anatomical locations (`mesiotemporal` vs. `neocortical`) in `channel_labels.xlsx` (and `thalamus_channels.xlsx` for subcortical channels).
 4. **Detection Results:** Place external or recomputed detector outputs in `detector_results/` (`p<id>_ied.pkl`, `p<id>_hfo.pkl`, `p<id>_slow-wave.pkl`).
-
+5. **Execute Analysis Pipeline:** Activate the main environment and run the sequential analysis and figure generation scripts.
 ---
 
 

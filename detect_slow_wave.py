@@ -35,6 +35,7 @@ from datetime import timezone
 import numpy as np
 import pandas as pd
 import pyedflib
+import importlib
 
 sw_module = importlib.import_module('slow-wave-detector.slow_wave_detector.slow_wave_detector')
 SlowWaveDetector = sw_module.SlowWaveDetector
