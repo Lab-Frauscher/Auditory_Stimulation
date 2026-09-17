@@ -1,5 +1,5 @@
 """
-hfo_ied_detection_seeg.py
+detect_ied_hfo.py
 
 Description:
 ==================
@@ -29,7 +29,7 @@ Key Processing Steps:
 Dependencies:
 -------------------
 - pyedflib
-- epycom (epycom.event_detection.hfo, epycom.event_detection.spike)
+- epycom
 - scipy
 - pandas
 - numpy
@@ -305,7 +305,7 @@ for id_patient in patients:
         hfo_detection['unix_stop'] = time_start + (
                 hfo_detection['event_stop'].astype('float64') / fvz
         )
-        hfo_detection.to_pickle(f'detector_results/p{id_patient}_hfo.pkl')
+        # hfo_detection.to_pickle(f'detector_results/p{id_patient}_hfo.pkl')
 
     # --- POST-PROCESS AND EXPORT IED METRICS ---
     ied_detection = (
@@ -324,7 +324,7 @@ for id_patient in patients:
         )
         clear_ied['ID'] = f'P{id_patient}'
 
-        clear_ied.to_pickle(f'detector_results/p{id_patient}_ied.pkl')
+        # clear_ied.to_pickle(f'detector_results/p{id_patient}_ied.pkl')
 
     f.close()
     print(f'Patient P{id_patient} processing complete.')

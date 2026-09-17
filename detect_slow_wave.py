@@ -26,6 +26,7 @@ Dependencies:
 - slow_wave_detector
 - pandas
 - numpy
+- importlib
 """
 
 import math
@@ -34,7 +35,10 @@ from datetime import timezone
 import numpy as np
 import pandas as pd
 import pyedflib
-from slow_wave_detector import SlowWaveDetector
+
+sw_module = importlib.import_module('slow-wave-detector.slow_wave_detector.slow_wave_detector')
+SlowWaveDetector = sw_module.SlowWaveDetector
+
 
 # --- MAIN PIPELINE EXECUTION ---
 patient_ids = [11, 14]

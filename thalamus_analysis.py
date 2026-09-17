@@ -1,5 +1,5 @@
 """
-spectral_power_seeg.py
+thalamus_analysis.py
 
 Description:
 ==================

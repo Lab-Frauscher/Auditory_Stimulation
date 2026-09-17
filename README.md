@@ -1,11 +1,11 @@
 # IED, HFO, Slow-Wave, and Spectral Power Ratio Analyses for Sleep Fragmentation Study
 
-This repository provides the Python codebase and analysis pipeline used for our manuscript:
-> **"Sleep fragmentation drives local, network-specific epileptic activity in human epilepsy"**
-
-The pipeline processes stereo-EEG (SEEG) and scalp EEG recordings from patients with focal epilepsy to evaluate interictal epileptiform discharges (IEDs), high-frequency oscillations (HFOs), slow-wave co-occurrences, and spectral power ratios across auditory stimulation events and sleep arousals.
+This repository contains the Python codebase and analysis pipeline used in the manuscript:
+> **"Sleep fragmentation drives local, network-specific epileptic activity in human epilepsy"** by Frauscher et al. (2026).
 
 **Preprint:** [https://www.biorxiv.org/content/10.64898/2025.11.30.691386v1](https://www.biorxiv.org/content/10.64898/2025.11.30.691386v1)
+
+The pipeline processes stereo-EEG (SEEG) and scalp EEG recordings from patients with drug-resistant focal epilepsy to evaluate interictal epileptiform discharges (IEDs), high-frequency oscillations (HFOs), slow-wave co-occurrences, and spectral power ratios across auditory stimulation events and sleep arousals.
 
 ---
 
@@ -17,11 +17,11 @@ The pipeline processes stereo-EEG (SEEG) and scalp EEG recordings from patients 
 - [Expected Runtimes](#expected-runtimes)
 - [Reproducing the Analyses](#reproducing-the-analyses)
   - [Step 0: Automated Detection Pipeline (Optional)](#step-0-automated-detection-pipeline-optional)
-  - [Step 1: Scalp EEG Power Ratios](#step-1-scalp-eeg-power-ratios)
+  - [Step 1: Scalp EEG SpectralPower Ratios](#step-1-scalp-eeg-spectral-power-ratios)
   - [Step 2: IED and Slow-Wave Integration Analysis](#step-2-ied-and-slow-wave-integration-analysis)
   - [Step 3: High-Frequency Oscillations (HFO) Analysis](#step-3-high-frequency-oscillations-hfo-analysis)
   - [Step 4: IED Propagation & Thalamic Spectral Dynamics](#step-4-ied-propagation--thalamic-spectral-dynamics)
-  - [Step 5: Generate Manuscript Figures](#step-5-generate-manuscript-figures)
+  - [Step 5: Generate Group- and Patient-Level Temporal Dynamics Plots](#step-5-Generate-Group--and-Patient-Level-Temporal-Dynamics-Plots)
 - [External Detector Pipeline](#external-detector-pipeline)
 - [Running on Custom Data](#running-on-custom-data)
 - [References](#references)
@@ -92,7 +92,7 @@ The pipeline processes stereo-EEG (SEEG) and scalp EEG recordings from patients 
 * `openpyxl`
 * `matplotlib`
 * `seaborn`
-
+* `importlib`
 
 
 ---
@@ -104,10 +104,8 @@ The pipeline processes stereo-EEG (SEEG) and scalp EEG recordings from patients 
 
 ### 1. Clone the Main Repository
 ```bash
-git clone [https://github.com/Lab-Frauscher/Auditory_Stimulation.git](https://github.com/Lab-Frauscher/Auditory_Stimulation.git)
+git clone https://github.com/Lab-Frauscher/Auditory_Stimulation.git
 cd Auditory_Stimulation
-git lfs pull
-
 ```
 
 ### 2. Set Up Virtual Environment & Core Dependencies
@@ -118,21 +116,28 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
 # Install core packages and fixed epycom/numba environment
 pip install -r requirements.txt
+deactivate
 
 ```
 
 ### 3. Install External Slow-Wave Detector (GitLab SSH Required)
 
-Clone and install the slow-wave detector package into your active environment:
+Clone and install the slow-wave detector package into your active environment. Isolated environment is needed to resolve dependency conflicts:
 
 ```bash
-# Clone slow-wave-detector repository
+# Clone the private detector repository
 git clone git@gitlab.com:anphy_duke/lab-tools/slow-wave-detector.git
 
-# Install slow-wave-detector in editable mode (or via its requirements)
+# Create dedicated virtual environment
+python -m venv venv_sw
+source venv_sw/bin/activate  # On Windows: venv_sw\Scripts\activate
+
+# Install detector dependencies and package
 cd slow-wave-detector
-pip install -e .
+pip install importlib
+pip install -r requirements.txt
 cd ..
+deactivate
 
 ```
 
@@ -165,21 +170,26 @@ Evaluated on a standard desktop computer (Apple M-series / Intel i7 CPU, 16 GB R
 
 *Pre-computed detector outputs for demo datasets are included in `detector_results/`. You can skip this step unless re-running detections directly from raw `.edf` recordings.*
 
-To execute automated signal detection algorithms on demo files (`P11`, `P14`):
+Execute automated signal detections from raw EDF files using their respective environments:
 
+1. Run IED & HFO Detection:
 ```bash
-python detect_ied_hfo.py
-python detect_slow_wave.py
+venv/bin/python detect_ied_hfo.py
+```
 
+2. Run Slow-wave Detection:
+```bash
+venv_sw/bin/python detect_slow_wave.py
 ```
 
 ---
 
-### Step 1: Scalp EEG Power Ratios
+### Step 1: Scalp EEG Spectral Power Ratios
 
-Compute baseline pre-stimulus delta power ratio (0.5–4.0 Hz / 4.5–30.0 Hz) for scalp channels:
+Compute baseline pre-stimulus spectral power ratio (0.5–4.0 Hz / 4.5–30.0 Hz) for scalp EEG channels:
 
 ```bash
+source venv_main/bin/activate
 python spectral_power_scalp.py
 
 ```
@@ -188,7 +198,7 @@ python spectral_power_scalp.py
 
 ### Step 2: IED and Slow-Wave Integration Analysis
 
-Extract channel-level raw IED spike counts within 3-second baseline and post-event windows. Integrate event-level slow-wave presence, time-aligned scalp power ratios, sleep stages, SOZ designations, and anatomical classifications (mesiotemporal vs. neocortical):
+Extract channel-level raw IED counts within 3-second baseline and post-event windows. Integrate event-level slow-wave presence, time-aligned scalp EEG spectral power ratios, anatomical classifications (mesiotemporal vs. neocortical), SOZ designations (SOZ vs. non-SOZ) and sleep stage (N2 vs. N3), and:
 
 ```bash
 python ied_slow-wave_power-ratio_analysis.py
@@ -199,7 +209,7 @@ python ied_slow-wave_power-ratio_analysis.py
 
 ### Step 3: High-Frequency Oscillations (HFO) Analysis
 
-Extract ripple and fast-ripple events (≥ 80 Hz) from pre-computed detections, and quantify pre- and post-event HFO rates per channel:
+Extract ripple and fast-ripple events (≥80 Hz) from pre-computed detections, and quantify pre- and post-event HFO rates per channel:
 
 ```bash
 python hfo_analysis.py
@@ -220,7 +230,7 @@ python thalamus_analysis.py
 
 ---
 
-### Step 5: Generate Manuscript Figures
+### Step 5: Generate Group- and Patient-Level Temporal Dynamics Plots
 
 Generate Figures 8a, 8b, 8c, and Supplementary Figure S16:
 
